@@ -45,10 +45,6 @@ if(other_image_speed > 0){
 
 #endregion
 
-#region TO REMOVE
-x = mouse_x;
-y = mouse_y;
-#endregion
 
 #region Making the hands and gear follow the smoke boss
 
@@ -69,14 +65,15 @@ if(hands_y != y){
 
 }
 
-//Gear
 
+//Gear
 
 //If the x of the gear does not equal the x of the object
 if(gear_x != x){
 	
 	//Slowly move the x position of the gear to the x of the object
 	gear_x = lerp(gear_x, x, .09);
+	
 }
 
 //If the y of the gear does not equal the y of the object
@@ -86,5 +83,30 @@ if(gear_y != y){
 	gear_y = lerp(gear_y, y, .09);
 
 }
+
+#endregion
+
+#region Attacking
+
+	if(attack_timer <= 0){
+	
+		var _bullet = instance_create_layer(x, y, "layer_instances", o_bullet2);
+
+		with(_bullet){
+		
+			//type = "Tracker";
+			sprite_index = s_gear;
+		
+		}
+		
+		attack_timer = random_range(50, 100);
+	
+	}
+	
+	if(attack_timer > 0){
+	
+		attack_timer--;
+	
+	}
 
 #endregion

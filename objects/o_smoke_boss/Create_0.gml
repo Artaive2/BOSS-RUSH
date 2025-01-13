@@ -14,3 +14,10 @@ hands_y = y;
 
 //Animation variables
 other_image_speed = 4;
+
+//Attack variables
+attack_timer = random_range(50, 100);
+
+x_speed = 0;
+y_speed = 0;
+phase = 1;
