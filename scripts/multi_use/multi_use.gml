@@ -16,7 +16,7 @@ function scr_col(){
 				
 			instance_destroy();
 					
-			_col_player.the_health -= damage;
+			_col_player.the_health -= bullet.damage;
 				
 		}
 

@@ -88,23 +88,32 @@ if(gear_y != y){
 
 #region Attacking
 
+	//If the attack timer is less than or equal to 0
 	if(attack_timer <= 0){
 	
+		//Create a bullet
 		var _bullet_object = instance_create_layer(x, y, "layer_instances", o_bullet2);
 		
+		//Save current direction of the player
 		var _angle = point_direction(x, y, o_player.x, o_player.y);
 		
+		//Go to the previously created bullet object
 		with(_bullet_object){
 		
-			type = "Tracker";
+			//Set the type to the type picked by the smoke boss [TO CHANGE]
+			type = "Bomb";
+			
+			//Set sprite index to gear
 			sprite_index = s_gear;
 		
 		}
 		
+		//Pick a random number for the attack timer
 		attack_timer = random_range(50, 100);
 	
 	}
 	
+	//If the attack timer is greater than 0, reduce by 1
 	if(attack_timer > 0){
 	
 		attack_timer--;

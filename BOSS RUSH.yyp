@@ -35,6 +35,7 @@
   },
   "name":"BOSS RUSH",
   "resources":[
+    {"id":{"name":"o_animations","path":"objects/o_animations/o_animations.yy",},},
     {"id":{"name":"o_bullet","path":"objects/o_bullet/o_bullet.yy",},},
     {"id":{"name":"o_bullet2","path":"objects/o_bullet2/o_bullet2.yy",},},
     {"id":{"name":"o_game","path":"objects/o_game/o_game.yy",},},

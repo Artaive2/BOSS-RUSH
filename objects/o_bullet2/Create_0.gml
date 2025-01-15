@@ -7,10 +7,12 @@ bullet = 0;
 
 //Tracker variables
 tracker_timer = 250;
-offset = 0;
 
+//Bomber variables
+bomb_timer = 250;
+explosion_area = 30;
 
 //Creating bullet structs	
-straight_bullet = new str_bullets(1, 50, 3, angle);
-tracker_bullet = new str_bullets(5, 20, 1, 0);
-	
+straight_bullet = new str_bullets(1,3, angle);
+tracker_bullet = new str_bullets(5, 1, 0);
+bomb_bullet = new str_bullets(10, 1, angle);

@@ -21,7 +21,7 @@ switch(type){
 		//Set bullet to be the tracker bullet created in the create event
 		bullet = tracker_bullet;
 		
-		//If the tracker time is bigger than 0
+		//If the tracker time is greater than 0
 		if(tracker_timer > 0){
 			
 			//Get the current direction of the player
@@ -39,6 +39,56 @@ switch(type){
 		
 		}
 		
+	break;
+	
+	#endregion
+	
+	
+	#region Bomb
+	
+	case "Bomb":
+	
+		
+		//Set bullet to be the tracker bullet created in the create event
+		bullet = bomb_bullet;
+		
+		//Get the current direction of the player
+		bullet.angle = point_direction(x, y, o_player.x, o_player.y);
+			
+		//If the tracker time is greater than 0
+		if(bomb_timer > 0){
+			
+			//Reduce tracker timer
+			bomb_timer--;
+		
+		}
+		
+		//If the tracker timer is less than or equal 0, the projectile explodes
+		if(bomb_timer <= 0){
+		
+			//Checking for collision with the player in the area of the explosion
+			var _col = collision_circle(x, y, explosion_area, o_player, 1, 1);
+			
+			//If there's a collision with the player
+			if(_col){
+			
+				//Damage the player
+				_col.the_health -= bullet.damage;
+			
+			}
+			
+			//Create an explosion animation instance
+			var _exp = instance_create_layer(x, y, "layer_effects", o_animations);
+			
+			//Pass a sprite
+			_exp.sprite = s_fire;
+			
+			//Destroy this instance
+			instance_destroy();
+			
+		
+		}
+	
 	break;
 	
 	#endregion

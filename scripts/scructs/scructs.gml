@@ -1,8 +1,9 @@
-
-function str_bullets(_damage, _chance, _spd, _angle) constructor{
+/// @param _damage
+/// @param _spd
+/// @param _angle
+function str_bullets(_damage, _spd, _angle) constructor{
 	
 	damage = _damage;
-	chance = _chance;
 	spd = _spd;
 	angle = _angle;
 	
