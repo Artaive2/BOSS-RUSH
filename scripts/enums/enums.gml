@@ -15,3 +15,12 @@ enum player_move_states{
 	jumping,
 
 }
+
+enum bullet_type{
+
+	straight,
+	tracker,
+	bomb,
+	spread,
+
+}

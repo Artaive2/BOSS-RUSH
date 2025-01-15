@@ -90,11 +90,13 @@ if(gear_y != y){
 
 	if(attack_timer <= 0){
 	
-		var _bullet = instance_create_layer(x, y, "layer_instances", o_bullet2);
-
-		with(_bullet){
+		var _bullet_object = instance_create_layer(x, y, "layer_instances", o_bullet2);
 		
-			//type = "Tracker";
+		var _angle = point_direction(x, y, o_player.x, o_player.y);
+		
+		with(_bullet_object){
+		
+			
 			sprite_index = s_gear;
 		
 		}

@@ -1,15 +1,10 @@
 
-function str_bullets(_type, _damage, _chance, _spd) constructor{
+function str_bullets(_damage, _chance, _spd, _angle) constructor{
 	
-	type = _type;
 	damage = _damage;
 	chance = _chance;
 	spd = _spd;
+	angle = _angle;
+	
 
-
-		draw_bullet = function(_sprite){
-		
-			sprite_index = _sprite;
-		
-		}
 }

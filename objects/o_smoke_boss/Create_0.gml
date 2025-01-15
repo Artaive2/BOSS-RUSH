@@ -1,3 +1,10 @@
+
+//Smoke boss variables
+x_speed = 0;
+y_speed = 0;
+phase = 1;
+
+
 //Gear variables
 gear_image_num = 0;
 gear_image_max_num = 32;
@@ -17,7 +24,8 @@ other_image_speed = 4;
 
 //Attack variables
 attack_timer = random_range(50, 100);
+the_bullet_type = "Straight";
 
-x_speed = 0;
-y_speed = 0;
-phase = 1;
+
+straight_bullet = new str_bullets(1, 50, 3, 0);
+tracker_bullet = new str_bullets(5, 20, .1, 0);
