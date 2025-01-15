@@ -96,7 +96,7 @@ if(gear_y != y){
 		
 		with(_bullet_object){
 		
-			
+			type = "Tracker";
 			sprite_index = s_gear;
 		
 		}

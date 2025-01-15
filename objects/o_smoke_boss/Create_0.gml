@@ -24,8 +24,4 @@ other_image_speed = 4;
 
 //Attack variables
 attack_timer = random_range(50, 100);
-the_bullet_type = "Straight";
-
-
-straight_bullet = new str_bullets(1, 50, 3, 0);
-tracker_bullet = new str_bullets(5, 20, .1, 0);
+type = "Straight";
