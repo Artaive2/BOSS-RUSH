@@ -71,6 +71,46 @@ if(other_image_speed > 0){
 #endregion
 
 
+#region Movement
+
+y += bobbing;
+
+//Check if the player is close
+var _col = collision_circle(x, y, range_player, o_player, 0, 1);
+var _player_dir = point_direction(x, y, o_player.x, o_player.y);
+
+//If player gets closer or boss gets close to player
+if(_col || distance_to_object(o_player) < range_limit ){
+
+	//Move away
+	//x_speed += (x - o_player.x) * easing;
+	//y_speed += (y - o_player.y) * easing;
+	
+	x_speed += sign(x - o_player.x) * easing;
+	y_speed += sign(-_player_dir) * easing;
+	
+	//Make sure instance does not go higher or lower than max speed when easing
+	x_speed = clamp(x_speed, -max_spd, max_spd);
+	y_speed = clamp(y_speed, -max_spd, max_spd);
+
+}
+
+
+if(!_col){
+
+	x_speed += sign(o_player.x - x) * easing;
+	y_speed += sign(_player_dir) * easing;
+	
+	x_speed = clamp(x_speed, -max_spd, max_spd);
+	y_speed = clamp(y_speed, -max_spd, max_spd);
+
+}
+
+
+
+#endregion
+
+
 #region Making the hands and gear follow the smoke boss
 
 //Hands
@@ -156,7 +196,7 @@ if(chance >= 50){
 	//If the attack timer is less than or equal to 0
 	if(attack_timer <= 0){
 		
-		if(attacking_time > 0){
+		do{
 			
 			//Type to pass to the bullet
 			var _type = type;
@@ -167,7 +207,7 @@ if(chance >= 50){
 			//Go to the previously created bullet object
 			with(_bullet_object){
 		
-				//Set the type to the type picked by the smoke boss [TO CHANGE]
+				//Set the type to the type picked by the smoke boss
 				type = _type;
 			
 				//Set sprite index to gear
@@ -175,17 +215,17 @@ if(chance >= 50){
 		
 			}
 			
-			attacking_time--;
+			attacking_duration--;
 		
-		}
+		}until(attacking_duration <= 0);
+		
+		
+			
+			
+		
 		//Pick a random number for the attack timer
 		attack_timer = random_range(50, 100);
 		
-		if(attacking_time <= 0){
-		
-			attacking_time = 50;
-		
-		}
 	
 	}
 	
@@ -193,6 +233,33 @@ if(chance >= 50){
 	if(attack_timer > 0){
 	
 		attack_timer--;
+	
+	}
+
+#endregion
+
+
+#region Moving
+
+x += x_speed;
+y += y_speed;
+
+#endregion
+
+
+#region Confining instance to room
+
+	//Horizontal checking
+	if(bbox_left < 0 || bbox_right > room_width){
+	
+		x = xprevious;
+	
+	}
+	
+	//Vertical checking
+	if(bbox_top < 0 || bbox_bottom > (room_height / 2) ){
+	
+		y = yprevious;
 	
 	}
 

@@ -14,8 +14,8 @@ coyote_time = true;
 pulled = false;
 grapple_timer = 0;
 
-the_health = 30;
 
+the_health = 30;
 
 //Player state for finite machine
 my_state = player_states.moving;

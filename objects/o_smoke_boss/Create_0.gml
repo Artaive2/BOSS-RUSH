@@ -2,7 +2,17 @@
 //Smoke boss variables
 x_speed = 0;
 y_speed = 0;
+spd = 2;
+max_spd = .5;
+easing = .1;
 phase = 1;
+
+//The range used to detect if player is getting closer
+range_player = 150;
+
+//The maxmimum pixels the boss can get closer to the player
+range_limit = 200;
+
 
 
 //Gear variables
@@ -23,9 +33,13 @@ hands_attack_image_max_num = 8;
 
 //Animation variables
 other_image_speed = 4;
+bobbing = .08;
+alarm[0] = 1;
 
 //Attack variables
 attack_timer = random_range(50, 100);
-attacking_time = 50;
+attacking_duration = 150;
+
+attacking = false;
 type = "";
 chance = irandom(100);

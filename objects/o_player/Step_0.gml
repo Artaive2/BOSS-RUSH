@@ -55,49 +55,6 @@ switch(my_state){
 
 		}
 		
-		/*
-		
-		//If the run button is pressed
-		if(_run){
-		
-			//Set speed to run speed
-			spd = run_spd;
-			
-			//Change sprite to running
-			sprite_index = player_sprite[player_move_states.running];
-		
-		}else{//If the run button isn't pressed
-		
-			//Change speed to walk speed
-			spd = walk_spd;
-		
-		}
-		
-		*/
-
-		/*
-		
-		//If the grapple button is pressed and there isn't already a grapple hook
-		if(_grapple && !instance_exists(o_grapple_hook) && grapple_timer <= 0){
-		
-			//Create a grapple hook
-			instance_create_layer(x, y, "layer_items", o_grapple_hook);
-			
-			//Change state to pulled
-			//my_state = player_states.pulled;
-			grapple_timer = 10;
-			
-			
-		}
-		
-		if(grapple_timer > 0){
-		
-			grapple_timer--;
-		
-		}
-		
-		*/
-		
 		//Apply pixel perfect collision
 		move(o_wall);
 		
@@ -108,19 +65,6 @@ switch(my_state){
 			sprite_index = player_sprite[player_move_states.running];
 		
 		}
-		
-		
-		/*
-		
-		//If the player is not pressing the run button
-		if(!_run){
-		
-			//Change sprite to walking sprite
-			sprite_index = player_sprite[player_move_states.walking];
-		
-		}
-		
-		*/
 		
 		//If the player is not moving
 		if(x_movement = 0){
@@ -160,3 +104,23 @@ switch(my_state){
 		
 
 }
+
+
+
+#region Confining instance to room
+
+	//Horizontal checking
+	if(bbox_left < 0 || bbox_right > room_width){
+	
+		x = xprevious;
+	
+	}
+	
+	//Vertical checking
+	if(bbox_top < 0 || bbox_bottom > room_height){
+	
+		y = yprevious;
+	
+	}
+
+#endregion

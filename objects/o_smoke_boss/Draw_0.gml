@@ -1,14 +1,12 @@
-
-//draw_line(x, y, hands_x + 16, hands_y + 10);
-//draw_line(x, y, hands_x - 16, hands_y + 10);
-
 draw_self();
+
+draw_text(10, 10, string(attacking_duration));
 
 //Draw gear
 draw_sprite(s_gear, gear_image_num, gear_x, gear_y + 5);
 
 
-if(attack_timer > 0){
+if(attacking == false){
 	
 	sprite_index = s_smoke_boss;
 	
@@ -19,7 +17,7 @@ if(attack_timer > 0){
 }
 
 //If the attack timer is less than or equal to 0
-if(attack_timer <= 0){
+if(attacking == true){
 	
 	sprite_index = s_smoke_boss_attack;
 	
