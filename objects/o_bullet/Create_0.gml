@@ -13,11 +13,8 @@ bomb_timer = 250;
 explosion_area = 30;
 flash_timer = 10;
 
-//Spread variables
-spread_offset = angle - 5;
-
 //Creating bullet structs	
 straight_bullet = new str_bullets(2,3, angle);
 tracker_bullet = new str_bullets(5, 1, 0);
 bomb_bullet = new str_bullets(10, 1, 0);
-spread_bullet = new str_bullets(1, 3, spread_offset);
+spread_bullet = new str_bullets(1, 3, 0);

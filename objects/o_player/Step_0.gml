@@ -74,10 +74,6 @@ switch(my_state){
 		
 		}
 		
-		
-		
-		//If the
-		
 			
 		//If the player is falling down
 		if(y_movement > 0){
@@ -94,9 +90,6 @@ switch(my_state){
 		
 		}
 			
-		
-		
-		
 
 		break;
 		

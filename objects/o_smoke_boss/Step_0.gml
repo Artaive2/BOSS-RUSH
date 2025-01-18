@@ -26,8 +26,9 @@ if(other_image_speed > 0){
 	
 	#region Hands
 	
-	if(attack_timer > 0){
-		
+	//Normal hands animation
+	if(ultimate == false){
+
 		//If the image number is less than the max image number
 		if(hands_image_num < hands_image_max_num){
 
@@ -41,72 +42,33 @@ if(other_image_speed > 0){
 
 		}
 		
-		if(attack_timer <= 0){
-		
-			
-			//If the image number is less than the max image number
-			if(hands_attack_image_num < hands_attack_image_max_num){
-
-				//Increase by 1
-				hands_attack_image_num++;
-
-			}else{//If the image number is equal or higher than the max number
-
-				//Reset it to 0
-				hands_attack_image_num = 0;
-
-			}
-		
-		}
-	
 	}
 	
-	#endregion
+	
+	//Ultimate hands animation
+	if(ultimate == true){
+		
+		//If the image number is less than the max image number
+		if(hands_attack_image_num < hands_attack_image_max_num){
+
+			//Increase by 1
+			hands_attack_image_num++;
+
+		}else{//If the image number is equal or higher than the max number
+
+			//Reset it to 0
+			hands_attack_image_num = 0;
+
+		}
+		
+	}
+	
+#endregion
 	
 	//Reset the image speed to 4
 	other_image_speed = 4;
 
 }
-
-#endregion
-
-
-#region Movement
-
-y += bobbing;
-
-//Check if the player is close
-var _col = collision_circle(x, y, range_player, o_player, 0, 1);
-var _player_dir = point_direction(x, y, o_player.x, o_player.y);
-
-//If player gets closer or boss gets close to player
-if(_col || distance_to_object(o_player) < range_limit ){
-
-	//Move away
-	//x_speed += (x - o_player.x) * easing;
-	//y_speed += (y - o_player.y) * easing;
-	
-	x_speed += sign(x - o_player.x) * easing;
-	y_speed += sign(-_player_dir) * easing;
-	
-	//Make sure instance does not go higher or lower than max speed when easing
-	x_speed = clamp(x_speed, -max_spd, max_spd);
-	y_speed = clamp(y_speed, -max_spd, max_spd);
-
-}
-
-
-if(!_col){
-
-	x_speed += sign(o_player.x - x) * easing;
-	y_speed += sign(_player_dir) * easing;
-	
-	x_speed = clamp(x_speed, -max_spd, max_spd);
-	y_speed = clamp(y_speed, -max_spd, max_spd);
-
-}
-
-
 
 #endregion
 
@@ -191,38 +153,75 @@ if(chance >= 50){
 #endregion
 
 
+#region Movement
+
+
+//Check if the player is close
+var _col = collision_circle(x, y, range_player, o_player, 0, 1);
+var _player_dir = point_direction(x, y, o_player.x, o_player.y);
+
+
+//Apply bobbing
+y += bobbing;
+
+//If the ultimate attack has not been triggered
+if(ultimate_timer > 0){
+	
+	//If player gets closer or boss gets close to player
+	if(_col || distance_to_object(o_player) < range_limit ){
+
+		//Move away
+		//x_speed += (x - o_player.x) * easing;
+		//y_speed += (y - o_player.y) * easing;
+	
+		x_speed += sign(x - o_player.x) * easing;
+		y_speed += sign(-_player_dir) * easing;
+	
+		//Make sure instance does not go higher or lower than max speed when easing
+		x_speed = clamp(x_speed, -max_spd, max_spd);
+		y_speed = clamp(y_speed, -max_spd, max_spd);
+
+	}
+
+
+	if(!_col){
+
+		x_speed += sign(o_player.x - x) * easing;
+		y_speed += sign(_player_dir) * easing;
+	
+		x_speed = clamp(x_speed, -max_spd, max_spd);
+		y_speed = clamp(y_speed, -max_spd, max_spd);
+
+	}
+
+#endregion
+
+
 #region Attacking
 
+
+#region Normal attacks
+		
 	//If the attack timer is less than or equal to 0
 	if(attack_timer <= 0){
 		
-		do{
+		//Type to pass to the bullet
+		var _type = type;
+		
+		//Create a bullet
+		var _bullet_object = instance_create_layer(x, y, "layer_instances", o_bullet);
+		
+		//Go to the previously created bullet object
+		with(_bullet_object){
+		
+			//Set the type to the type picked by the smoke boss
+			type = _type;
 			
-			//Type to pass to the bullet
-			var _type = type;
+			//Set sprite index to gear
+			sprite_index = s_gear;
 		
-			//Create a bullet
-			var _bullet_object = instance_create_layer(x, y, "layer_instances", o_bullet);
-		
-			//Go to the previously created bullet object
-			with(_bullet_object){
-		
-				//Set the type to the type picked by the smoke boss
-				type = _type;
+		}
 			
-				//Set sprite index to gear
-				sprite_index = s_gear;
-		
-			}
-			
-			attacking_duration--;
-		
-		}until(attacking_duration <= 0);
-		
-		
-			
-			
-		
 		//Pick a random number for the attack timer
 		attack_timer = random_range(50, 100);
 		
@@ -235,8 +234,162 @@ if(chance >= 50){
 		attack_timer--;
 	
 	}
+		
+	//Reduce the ultimate attack timer
+	ultimate_timer--;
+	
+	#endregion Normal attacks
+	
+}
+	
 
-#endregion
+#region Ultimate attack
+
+//If the ultimate timer is less than or equal to 0
+if(ultimate_timer <= 0){
+	
+	#region Movement to ultimate attack spot
+	
+	//Variable to check if the boss is at the x and y position before changing ultimate to true
+	var x_done = false;
+	var y_done = false;
+	
+	//If x is not equal to the ultimate attack x
+	if(x != ultimate_spot_x){
+			
+		//Keep moving the instance to the spot slowly
+		x_speed += (ultimate_spot_x - x) * .1;
+		
+		//Make sure the x movement does not go higher or lower than the max speed
+		x_speed = clamp(x_speed, -max_spd, max_spd);
+		
+			
+	}
+	
+	//If y is not equal to the ultimate attack y
+	if(y != ultimate_spot_y){
+	
+		//Keep moving the instance to the spot slowly
+		y_speed += (ultimate_spot_y - y) * .1;
+		
+		//Make sure the x movement does not go higher or lower than the max speed
+		y_speed = clamp(y_speed, -max_spd, max_spd);
+	
+	}
+	
+	//If the x is in the x spot for the attack
+	if( (x < ultimate_spot_x + 2) && (x > ultimate_spot_x - 2) ){
+		
+		//Stop x movement
+		x_speed = 0;
+		
+		x_done = true;
+		
+	}
+	
+	//If the y is in the x spot for the attack
+	if( (y < ultimate_spot_y + 2) && (y > ultimate_spot_y - 2) ){
+	
+		//Stop y movement
+		//y_speed = 0;
+		
+		y_done = true;
+	
+	}
+	
+	//If instance at the right position
+	if(x_done && y_done){
+	
+		//Change ultimate to true
+		ultimate = true;
+	
+	}
+	
+	#endregion Movement to ultimate attack spot
+	
+	
+	//Use timer variable for the attacks
+	if(timer > 0){
+	
+		timer--;
+	
+	}
+	
+}
+
+
+//The amount to add to the angle
+var _incr = 0;
+	
+//If the boss is idle
+if(ultimate == true){
+		
+	//If the duration is greater than 0
+	if(duration > 0){
+			
+			
+		if(timer <= 0){
+	
+			//Type to pass to the bullet
+			var _type = type;
+		
+			//Spawn 3 projectiles at once
+			repeat(3){
+			
+				//Set x and y for the angle
+				var _x = 16 * dcos(240 + _incr);
+				var _y = 16 * -dsin(240 + _incr);
+			
+				//Create projectile
+				var _bull = instance_create_layer(x + _x, y + _y, "layer_instances", o_bullet);
+		
+				//Change projectile variables
+				with(_bull){
+		
+					//Pass type
+					type = _type;
+			
+					//Set sprite index to gear
+					sprite_index = s_gear;
+				
+				}
+			
+				//Increase the amount to add to the angle by 30
+				_incr += 30;
+		
+			}
+	
+			//Reset timer
+			timer = 100;
+
+			
+			duration--;
+			
+		}
+		
+		
+	}
+		
+	//If the duration of the ultimate attack is less than or equal to 0
+	if(duration <= 0){
+		
+		//Reset ultimate timer
+		ultimate_timer = random_range(250, 300);
+			
+		//Reset duration
+		duration = 10;
+			
+		//Set ultimate to false
+		ultimate = false;
+		
+	}
+		
+}
+	
+	
+#endregion Ultimate attack
+	
+#endregion Attacking
 
 
 #region Moving

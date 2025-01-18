@@ -33,13 +33,19 @@ hands_attack_image_max_num = 8;
 
 //Animation variables
 other_image_speed = 4;
-bobbing = .08;
+bobbing = .1;
 alarm[0] = 1;
 
 //Attack variables
 attack_timer = random_range(50, 100);
-attacking_duration = 150;
 
-attacking = false;
+ultimate_timer = random_range(250, 300);
+ultimate_spot_x = room_width / 2;
+ultimate_spot_y = (room_height / 2) - 30;
+ultimate = false;
+timer = 0;
+
+duration = 10;
+
 type = "";
 chance = irandom(100);

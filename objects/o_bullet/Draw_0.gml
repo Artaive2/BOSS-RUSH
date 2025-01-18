@@ -1,5 +1,6 @@
 draw_self();
 
+
 //If the projectile is a bomb
 if(type = "Bomb"){
 	
