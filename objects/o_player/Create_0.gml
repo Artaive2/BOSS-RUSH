@@ -22,7 +22,7 @@ my_state = player_states.moving;
 
 
 player_sprite[player_move_states.idle] = s_player_idle;
-player_sprite[player_move_states.running] = s_player_running_v2;
+player_sprite[player_move_states.running] = s_player_running;
 player_sprite[player_move_states.walking] = s_player_walking;
 player_sprite[player_move_states.falling] = s_player_falling;
 player_sprite[player_move_states.jumping] = s_player_jumping;

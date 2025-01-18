@@ -1,135 +1,113 @@
-//Getting the direction of the player
-var _player_direction = point_direction(x, y, direction_x, direction_y);
-
-var _dir = point_direction(x, y, o_player.x, o_player.y);
-
-
-//Swtich functionality based on bullet type
+//Change bullet attributes base on type
 switch(type){
-		
-			#region Bouncy
-			case "Bouncy":
-				
-				/*
-				var _bounce_num = 3;
-				var _momentum = .5;
 
-				
-				
-				//Moving the bullet closer to the player direction
-				x += x_speed * dcos(_player_direction);
-				y += y_speed * -dsin(_player_direction);
-				
-				if(place_meeting(x + x_speed, y, o_wall)){
-				
-					x = xprevious;
-					
-					x_speed = -x_speed * _momentum;
-					
-					
-					if(y_speed = 0){
-						
-						y_speed = irandom_range(-1, 1);
-						
-					}else{
-					
-						y_speed = -y_speed * _momentum;
-					
-					}
-					
-					
-				
-				}
-				
-				
-				if(place_meeting(x, y + y_speed, o_wall)){
-				
-					y = yprevious;
-					
-					y_speed = -y_speed * _momentum;
-					
-					if(x_speed = 0){
-						
-						x_speed = irandom_range(-1, 1);
-					
-					}else{
-					
-						x_speed = -x_speed * _momentum;
-					
-					}
-				
-				}
-				*/
-			
-			break;
-			
-			#endregion
-			
-			#region Straight
-			
-			case "Straight":
-				
-				
-				damage = 1;
-				
-				//Moving the bullet closer to the player direction
-				scr_bullet_move(.3, _player_direction);
-				
-				//Destroying the instance when the bullet collides with the walls or player + damaging the player
-				//scr_col();
-			
-			
-			break;
-			
-			#endregion
-			
-			#region Tracker bullet
-			
-			case "Tracker":
-				
-				damage = 5;
-			
-				
-				
-				
-				//Moving the bullet closer to the player direction
-				scr_bullet_move( (distance_to_object(o_player) / 2), _player_direction);
-				
-				//Destroying the instance when the bullet collides with the walls or player + damaging the player
-				//scr_col();
-			
-			break;
-			
-			#endregion
-			
-			
-			#region Exploding bullet
-			
-			case "Bomb":
-			
-				damage = 10;
+
+	#region Straight bullet
 	
-				x_speed = 4;
-				y_speed = 4;
+	case "Straight":
+	
+		//Set bullet to be the straight bullet created in the create event
+		bullet = straight_bullet;
+	
+	break;
+	
+	#endregion
+	
+	
+	#region Tracker
+	
+	case "Tracker":
 		
-				bomb_timer = 20;
-				
-				
-				
+		//Set bullet to be the tracker bullet created in the create event
+		bullet = tracker_bullet;
+		
+		//If the tracker time is greater than 0
+		if(tracker_timer > 0){
 			
-			break;
+			//Get the current direction of the player
+			bullet.angle = point_direction(x, y, o_player.x, o_player.y);
 			
-			#endregion
+			//Reduce tracker timer
+			tracker_timer--;
+		
+		}
+		
+		//If the tracker timer is less than or equal 0
+		if(tracker_timer <= 0){
+		
+			//Do nothing
+		
+		}
+		
+	break;
+	
+	#endregion
+	
+	
+	#region Bomb
+	
+	case "Bomb":
+	
+		
+		//Set bullet to be the tracker bullet created in the create event
+		bullet = bomb_bullet;
+		
+		//Get the current direction of the player
+		bullet.angle = point_direction(x, y, o_player.x, o_player.y);
+			
+		//If the tracker time is greater than 0
+		if(bomb_timer > 0){
+			
+			//Reduce tracker timer
+			bomb_timer--;
+		
+		}
+		
+		//If the tracker timer is less than or equal 0, the projectile explodes
+		if(bomb_timer <= 0){
+		
+			//Checking for collision with the player in the area of the explosion
+			var _col = collision_circle(x, y, explosion_area, o_player, 1, 1);
+			
+			//If there's a collision with the player
+			if(_col){
+			
+				//Damage the player
+				_col.the_health -= bullet.damage;
+			
+			}
+			
+			//Create an explosion animation instance
+			var _exp = instance_create_layer(x, y, "layer_effects", o_animations);
+			
+			//Pass a sprite
+			_exp.sprite_index = s_fire;
+			
+			//Destroy this instance
+			instance_destroy();
+			
+		
+		}
+	
+	break;
+	
+	#endregion
+	
+	#region Spread
+	
+	case "Spread":
+	
+		//Set bullet to be the tracker bullet created in the create event
+		//bullet = spread_bullet;
 		
 		
+		
+	
+	break;
+	
+	#endregion
+
 }
 
-x += x_movement;
-y += y_movement;
-
-//If the bullet goes beyond room edges, destroy it
-if((x < 0) || (x > room_width) || (y < 0) || (y > room_height) ){
-
-	instance_destroy();
-	
-}
+//Moving the bullet
+scr_bullet_move(bullet.spd, bullet.angle);

@@ -35,6 +35,9 @@
     "name":"s_smoke_boss",
     "path":"sprites/s_smoke_boss/s_smoke_boss.yy",
   },
-  "spriteMaskId":null,
+  "spriteMaskId":{
+    "name":"s_smoke_boss_attack",
+    "path":"sprites/s_smoke_boss_attack/s_smoke_boss_attack.yy",
+  },
   "visible":true,
 }

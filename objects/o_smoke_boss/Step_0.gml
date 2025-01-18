@@ -23,19 +23,44 @@ if(other_image_speed > 0){
 	}
 	#endregion
 	
+	
 	#region Hands
-	//If the image number is less than the max image number
-	if(hands_image_num < hands_image_max_num){
+	
+	if(attack_timer > 0){
+		
+		//If the image number is less than the max image number
+		if(hands_image_num < hands_image_max_num){
 
-		//Increase by 1
-		hands_image_num++;
+			//Increase by 1
+			hands_image_num++;
 
-	}else{//If the image number is equal or higher than the max number
+		}else{//If the image number is equal or higher than the max number
 
-		//Reset it to 0
-		hands_image_num = 0;
+			//Reset it to 0
+			hands_image_num = 0;
 
+		}
+		
+		if(attack_timer <= 0){
+		
+			
+			//If the image number is less than the max image number
+			if(hands_attack_image_num < hands_attack_image_max_num){
+
+				//Increase by 1
+				hands_attack_image_num++;
+
+			}else{//If the image number is equal or higher than the max number
+
+				//Reset it to 0
+				hands_attack_image_num = 0;
+
+			}
+		
+		}
+	
 	}
+	
 	#endregion
 	
 	//Reset the image speed to 4
@@ -86,30 +111,81 @@ if(gear_y != y){
 
 #endregion
 
+
+#region Picking a projectile
+
+//If the chance is less than or equal to 10
+if(chance <= 10){
+
+	//Set type to bomb
+	type = "Bomb";
+	
+	//Reset chance pick
+	chance = irandom(100);
+
+}
+
+//If the chance is greater than 10 or less than 50
+if(chance > 10 && chance < 50){
+
+	//Set type to tracker
+	type = "Tracker";
+	
+	//Reset chance pick
+	chance = irandom(100);
+
+}
+
+//If the chance is greater than or equal to 50
+if(chance >= 50){
+
+	//Set type to straight
+	type = "Straight";
+	
+	//Reset chance pick
+	chance = irandom(100);
+
+}
+
+
+#endregion
+
+
 #region Attacking
 
 	//If the attack timer is less than or equal to 0
 	if(attack_timer <= 0){
-	
-		//Create a bullet
-		var _bullet_object = instance_create_layer(x, y, "layer_instances", o_bullet2);
 		
-		//Save current direction of the player
-		var _angle = point_direction(x, y, o_player.x, o_player.y);
-		
-		//Go to the previously created bullet object
-		with(_bullet_object){
-		
-			//Set the type to the type picked by the smoke boss [TO CHANGE]
-			type = "Bomb";
+		if(attacking_time > 0){
 			
-			//Set sprite index to gear
-			sprite_index = s_gear;
+			//Type to pass to the bullet
+			var _type = type;
+		
+			//Create a bullet
+			var _bullet_object = instance_create_layer(x, y, "layer_instances", o_bullet);
+		
+			//Go to the previously created bullet object
+			with(_bullet_object){
+		
+				//Set the type to the type picked by the smoke boss [TO CHANGE]
+				type = _type;
+			
+				//Set sprite index to gear
+				sprite_index = s_gear;
+		
+			}
+			
+			attacking_time--;
 		
 		}
-		
 		//Pick a random number for the attack timer
 		attack_timer = random_range(50, 100);
+		
+		if(attacking_time <= 0){
+		
+			attacking_time = 50;
+		
+		}
 	
 	}
 	

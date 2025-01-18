@@ -1,14 +1,23 @@
-//The type of the bullet
+//Bullet variables
 type = "";
-damage = 0;
+angle = point_direction(x, y, o_player.x, o_player.y);
+damage = 1;
+spd = 0;
+bullet = 0;
 
-x_movement = 0;
-y_movement = 0;
+//Tracker variables
+tracker_timer = 250;
 
-bomb_timer = irandom_range(10, 20);
-tracker_timer = irandom_range(40, 50);
+//Bomber variables
+bomb_timer = 250;
+explosion_area = 30;
+flash_timer = 10;
 
+//Spread variables
+spread_offset = angle - 5;
 
-//The direction the bullet should follow
-direction_x = o_player.x;
-direction_y = o_player.y;
+//Creating bullet structs	
+straight_bullet = new str_bullets(2,3, angle);
+tracker_bullet = new str_bullets(5, 1, 0);
+bomb_bullet = new str_bullets(10, 1, 0);
+spread_bullet = new str_bullets(1, 3, spread_offset);

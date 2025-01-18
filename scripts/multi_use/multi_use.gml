@@ -5,6 +5,11 @@ function scr_col(){
 		if(collision_point(x + spd, y + spd, o_wall, false, true)){
 				
 			instance_destroy();
+			
+			//Create an effect
+			var _effect = instance_create_layer(x, y, "layer_effects", o_animations);
+			
+			_effect.sprite_index = s_flash;
 				
 		}
 				
@@ -17,6 +22,11 @@ function scr_col(){
 			instance_destroy();
 					
 			_col_player.the_health -= bullet.damage;
+			
+			//Create an effect
+			var _effect = instance_create_layer(x, y, "layer_effects", o_animations);
+			
+			_effect.sprite_index = s_flash;
 				
 		}
 
