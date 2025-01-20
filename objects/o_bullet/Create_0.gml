@@ -4,6 +4,8 @@ angle = point_direction(x, y, o_player.x, o_player.y);
 damage = 1;
 spd = 0;
 bullet = 0;
+created = true;
+
 
 //Tracker variables
 tracker_timer = 250;

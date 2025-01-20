@@ -54,10 +54,13 @@ if(other_image_speed > 0){
 			//Increase by 1
 			hands_attack_image_num++;
 
-		}else{//If the image number is equal or higher than the max number
+		}
+		
+		//If the image number is equal or higher than the max number or less 4
+		if(hands_attack_image_num >= hands_attack_image_max_num || hands_attack_image_num < 4){
 
-			//Reset it to 0
-			hands_attack_image_num = 0;
+			//Reset it to the fifth frame
+			hands_attack_image_num = 4;
 
 		}
 		
@@ -160,10 +163,6 @@ if(chance >= 50){
 var _col = collision_circle(x, y, range_player, o_player, 0, 1);
 var _player_dir = point_direction(x, y, o_player.x, o_player.y);
 
-
-//Apply bobbing
-y += bobbing;
-
 //If the ultimate attack has not been triggered
 if(ultimate_timer > 0){
 	
@@ -183,12 +182,14 @@ if(ultimate_timer > 0){
 
 	}
 
-
+	//If the player is not in the range of the boss
 	if(!_col){
 
+		//Get closer to the player
 		x_speed += sign(o_player.x - x) * easing;
 		y_speed += sign(_player_dir) * easing;
 	
+		//Make sure instance does not go higher or lower than max speed when easing
 		x_speed = clamp(x_speed, -max_spd, max_spd);
 		y_speed = clamp(y_speed, -max_spd, max_spd);
 
@@ -209,7 +210,7 @@ if(ultimate_timer > 0){
 		var _type = type;
 		
 		//Create a bullet
-		var _bullet_object = instance_create_layer(x, y, "layer_instances", o_bullet);
+		var _bullet_object = instance_create_layer(x, y + 7, "layer_instances", o_bullet);
 		
 		//Go to the previously created bullet object
 		with(_bullet_object){
@@ -254,52 +255,56 @@ if(ultimate_timer <= 0){
 	var x_done = false;
 	var y_done = false;
 	
-	//If x is not equal to the ultimate attack x
-	if(x != ultimate_spot_x){
+	if(x_done == false && y_done == false){
+		
+		//If x is not equal to the ultimate attack x
+		if(x != ultimate_spot_x){
 			
-		//Keep moving the instance to the spot slowly
-		x_speed += (ultimate_spot_x - x) * .1;
+			//Keep moving the instance to the spot 
+			x_speed += (ultimate_spot_x - x) * .1;
 		
-		//Make sure the x movement does not go higher or lower than the max speed
-		x_speed = clamp(x_speed, -max_spd, max_spd);
+			//Make sure the x movement does not go higher or lower than the max speed
+			x_speed = clamp(x_speed, -3, 3);
 		
 			
-	}
+		}
 	
-	//If y is not equal to the ultimate attack y
-	if(y != ultimate_spot_y){
+		//If y is not equal to the ultimate attack y
+		if(y != ultimate_spot_y){
 	
-		//Keep moving the instance to the spot slowly
-		y_speed += (ultimate_spot_y - y) * .1;
+			//Keep moving the instance to the spot 
+			y_speed += (ultimate_spot_y - y) * .1;
 		
-		//Make sure the x movement does not go higher or lower than the max speed
-		y_speed = clamp(y_speed, -max_spd, max_spd);
+			//Make sure the x movement does not go higher or lower than the max speed
+			y_speed = clamp(y_speed, -3, 3);
 	
-	}
+		}
 	
-	//If the x is in the x spot for the attack
-	if( (x < ultimate_spot_x + 2) && (x > ultimate_spot_x - 2) ){
+		//If the x is in the x spot for the attack
+		if( (x < ultimate_spot_x + 2) && (x > ultimate_spot_x - 2) ){
 		
-		//Stop x movement
-		x_speed = 0;
+			//Stop x movement
+			x_speed = 0;
 		
-		x_done = true;
+			x_done = true;
 		
-	}
+		}
 	
-	//If the y is in the x spot for the attack
-	if( (y < ultimate_spot_y + 2) && (y > ultimate_spot_y - 2) ){
-	
-		//Stop y movement
-		//y_speed = 0;
+		//If the y is in the x spot for the attack
+		if( (y < ultimate_spot_y + 2) && (y > ultimate_spot_y - 2) ){
 		
-		y_done = true;
+			//Stop y movement
+			y_speed = 0;
+		
+			y_done = true;
+	
+		}
 	
 	}
 	
 	//If instance at the right position
 	if(x_done && y_done){
-	
+		
 		//Change ultimate to true
 		ultimate = true;
 	
@@ -324,10 +329,16 @@ var _incr = 0;
 //If the boss is idle
 if(ultimate == true){
 		
+	//Apply bobbing
+	y_speed += bobbing;
+	
+	//Clamp speed for bobbing
+	y_speed = clamp(y_speed, -bobbing, bobbing);
+		
 	//If the duration is greater than 0
 	if(duration > 0){
 			
-			
+		//If the attack timer is equal to or less than 0
 		if(timer <= 0){
 	
 			//Type to pass to the bullet

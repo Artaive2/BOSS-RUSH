@@ -1,6 +1,6 @@
 draw_self();
 
-draw_text(10, 10, string(duration) );
+draw_text(10, 10, string(hands_attack_image_num) );
 
 //Draw gear
 draw_sprite(s_gear, gear_image_num, gear_x, gear_y + 5);

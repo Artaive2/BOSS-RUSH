@@ -1,3 +1,14 @@
+//If the bullet was just created
+if(created == true){
+	
+	//Draw a flash
+	draw_sprite(s_flash, 0, x, y);
+	
+	//Set created to false
+	created = false;
+}
+
+
 draw_self();
 
 

@@ -50,6 +50,7 @@
     {"id":{"name":"movement","path":"scripts/movement/movement.yy",},},
     {"id":{"name":"multi_use","path":"scripts/multi_use/multi_use.yy",},},
     {"id":{"name":"scructs","path":"scripts/scructs/scructs.yy",},},
+    {"id":{"name":"sh_flash","path":"shaders/sh_flash/sh_flash.yy",},},
     {"id":{"name":"s_fire","path":"sprites/s_fire/s_fire.yy",},},
     {"id":{"name":"s_flash","path":"sprites/s_flash/s_flash.yy",},},
     {"id":{"name":"s_gear","path":"sprites/s_gear/s_gear.yy",},},

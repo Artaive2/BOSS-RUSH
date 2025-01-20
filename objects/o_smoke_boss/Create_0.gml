@@ -1,9 +1,11 @@
 
 //Smoke boss variables
-x_speed = 0;
-y_speed = 0;
+x_speed = irandom_range(-2, 2);
+y_speed = irandom_range(-2, 2);
+
+
 spd = 2;
-max_spd = .5;
+max_spd = 1;
 easing = .1;
 phase = 1;
 
