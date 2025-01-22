@@ -11,12 +11,27 @@ if(created == true){
 
 draw_self();
 
-
 //If the projectile is a bomb
 if(type = "Bomb"){
 	
-	//Speed up the animation the closer the bomb to exploding
-	image_speed += 2 / bomb_timer;
 
+	
+	if(flash_timer > 0){
+	
+		flash_timer--;
+	
+	}
+	
+	if(flash_timer <= 0){
+		
+		shader_set(sh_flash);
+		draw_self();
+		shader_reset();
+		
+		//Reset timer based on how close the bomb is to exploding
+		flash_timer = 2 * (bomb_timer / 4);
+	
+	}
+	
 	
 }

@@ -56,6 +56,7 @@ if(other_image_speed > 0){
 
 		}
 		
+		
 		//If the image number is equal or higher than the max number or less 4
 		if(hands_attack_image_num >= hands_attack_image_max_num || hands_attack_image_num < 4){
 
@@ -119,38 +120,41 @@ if(gear_y != y){
 
 #region Picking a projectile
 
+
+/*
 //If the chance is less than or equal to 10
-if(chance <= 10){
+if(chance >= 80){
 
 	//Set type to bomb
 	type = "Bomb";
 	
 	//Reset chance pick
-	chance = irandom(100);
+	chance = irandom(200 - the_health);
 
 }
 
 //If the chance is greater than 10 or less than 50
-if(chance > 10 && chance < 50){
+if(chance >= 50 && chance < 80){
 
 	//Set type to tracker
 	type = "Tracker";
 	
 	//Reset chance pick
-	chance = irandom(100);
+	chance = irandom(200 - the_health);
 
 }
 
 //If the chance is greater than or equal to 50
-if(chance >= 50){
+if(chance >= 0 && chance < 50){
 
 	//Set type to straight
 	type = "Straight";
 	
 	//Reset chance pick
-	chance = irandom(100);
+	chance = irandom(200 - the_health);
 
 }
+*/
 
 
 #endregion
@@ -161,20 +165,16 @@ if(chance >= 50){
 
 //Check if the player is close
 var _col = collision_circle(x, y, range_player, o_player, 0, 1);
-var _player_dir = point_direction(x, y, o_player.x, o_player.y);
 
 //If the ultimate attack has not been triggered
 if(ultimate_timer > 0){
 	
-	//If player gets closer or boss gets close to player
-	if(_col || distance_to_object(o_player) < range_limit ){
+	//If player gets closer or boss gets too close to player
+	if(_col){
 
 		//Move away
-		//x_speed += (x - o_player.x) * easing;
-		//y_speed += (y - o_player.y) * easing;
-	
 		x_speed += sign(x - o_player.x) * easing;
-		y_speed += sign(-_player_dir) * easing;
+		y_speed += sign(y - o_player.y) * easing;
 	
 		//Make sure instance does not go higher or lower than max speed when easing
 		x_speed = clamp(x_speed, -max_spd, max_spd);
@@ -183,17 +183,26 @@ if(ultimate_timer > 0){
 	}
 
 	//If the player is not in the range of the boss
-	if(!_col){
+	if(distance_to_object(o_player) > good_range){
 
 		//Get closer to the player
 		x_speed += sign(o_player.x - x) * easing;
-		y_speed += sign(_player_dir) * easing;
+		y_speed += sign(o_player.y - y) * easing;
 	
 		//Make sure instance does not go higher or lower than max speed when easing
 		x_speed = clamp(x_speed, -max_spd, max_spd);
 		y_speed = clamp(y_speed, -max_spd, max_spd);
 
 	}
+	
+	if(!_col && distance_to_object(o_player) < good_range){
+	
+		x_speed = 0;
+		y_speed = 0;
+		
+	}
+	
+	
 
 #endregion
 
@@ -208,9 +217,19 @@ if(ultimate_timer > 0){
 		
 		//Type to pass to the bullet
 		var _type = type;
+		var _angle = 0;
 		
 		//Create a bullet
-		var _bullet_object = instance_create_layer(x, y + 7, "layer_instances", o_bullet);
+		var _bullet_object = 0;
+		
+		//If the projectile is not of type spread
+		if(_type != "Spread"){
+			
+				_angle = point_direction(x, y, o_player.x, o_player.y);
+				
+				_bullet_object = instance_create_layer(x, y + 7, "layer_instances", o_bullet);
+				
+		}
 		
 		//Go to the previously created bullet object
 		with(_bullet_object){
@@ -220,8 +239,43 @@ if(ultimate_timer > 0){
 			
 			//Set sprite index to gear
 			sprite_index = s_gear;
+			
+			angle = _angle;
 		
 		}
+		
+		
+		if(_type == "Spread"){
+			
+			_angle = point_direction(x, y, o_player.x, o_player.y) - 40;
+			
+			repeat(3){
+			
+				_bullet_object = instance_create_layer(x, y + 7, "layer_instances", o_bullet);
+				
+				
+			
+				//Go to the previously created bullet object
+				with(_bullet_object){
+		
+					//Set the type to the type picked by the smoke boss
+					type = _type;
+			
+					//Set sprite index to gear
+					sprite_index = s_gear;
+			
+					angle = _angle;
+		
+				}
+				
+				_angle += 40;
+		
+			}
+		
+		
+		}
+		
+		
 			
 		//Pick a random number for the attack timer
 		attack_timer = random_range(50, 100);
@@ -329,20 +383,13 @@ var _incr = 0;
 //If the boss is idle
 if(ultimate == true){
 		
-	//Apply bobbing
-	y_speed += bobbing;
-	
-	//Clamp speed for bobbing
-	y_speed = clamp(y_speed, -bobbing, bobbing);
+	var _type = choose("Spread", "Explosive");
 		
 	//If the duration is greater than 0
 	if(duration > 0){
 			
 		//If the attack timer is equal to or less than 0
 		if(timer <= 0){
-	
-			//Type to pass to the bullet
-			var _type = type;
 		
 			//Spawn 3 projectiles at once
 			repeat(3){
@@ -358,7 +405,7 @@ if(ultimate == true){
 				with(_bull){
 		
 					//Pass type
-					type = _type;
+					type = "Bomb";
 			
 					//Set sprite index to gear
 					sprite_index = s_gear;
@@ -373,7 +420,7 @@ if(ultimate == true){
 			//Reset timer
 			timer = 100;
 
-			
+			//Decrease the duration of the attack
 			duration--;
 			
 		}
@@ -385,7 +432,7 @@ if(ultimate == true){
 	if(duration <= 0){
 		
 		//Reset ultimate timer
-		ultimate_timer = random_range(250, 300);
+		ultimate_timer = random_range(500, 800);
 			
 		//Reset duration
 		duration = 10;
@@ -404,6 +451,17 @@ if(ultimate == true){
 
 
 #region Moving
+
+if(y_speed == 0){
+
+	//x_speed = 0;
+	y_speed += bobbing;
+	
+	//Clamp speed for bobbing
+	y_speed = clamp(y_speed, -bobbing, bobbing);
+	
+	
+}
 
 x += x_speed;
 y += y_speed;

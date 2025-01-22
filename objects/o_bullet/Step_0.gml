@@ -8,6 +8,8 @@ switch(type){
 	
 		//Set bullet to be the straight bullet created in the create event
 		bullet = straight_bullet;
+		
+		bullet.angle = angle;
 	
 	break;
 	
@@ -93,13 +95,28 @@ switch(type){
 	
 	#endregion
 	
+	
 	#region Spread
 	
 	case "Spread":
 	
 		//Set bullet to be the tracker bullet created in the create event
-		//bullet = spread_bullet;
+		bullet = spread_bullet;
 		
+		bullet.angle = angle;
+		
+		
+	
+	break;
+	
+	#endregion
+	
+	
+	#region Explosive
+	
+	case "Explosive":
+	
+		bullet = explosive_bullet;
 		
 		
 	
@@ -111,3 +128,11 @@ switch(type){
 
 //Moving the bullet
 scr_bullet_move(bullet.spd, bullet.angle);
+
+
+//Destroying bullet when it leaves the room
+if(x < 0 || y < 0 || x > room_width || y > room_height){
+
+	instance_destroy();
+
+}

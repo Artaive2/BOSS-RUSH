@@ -1,19 +1,22 @@
+//Inherit parent create event
+event_inherited();
 
 //Smoke boss variables
-x_speed = irandom_range(-2, 2);
-y_speed = irandom_range(-2, 2);
+x_speed = 0;
+y_speed = 0;
 
-
+the_health = 100;
 spd = 2;
 max_spd = 1;
-easing = .1;
+easing = .01;
 phase = 1;
+still = false;
 
 //The range used to detect if player is getting closer
-range_player = 150;
+range_player = 100;
 
 //The maxmimum pixels the boss can get closer to the player
-range_limit = 200;
+good_range = 160;
 
 
 
@@ -41,7 +44,7 @@ alarm[0] = 1;
 //Attack variables
 attack_timer = random_range(50, 100);
 
-ultimate_timer = random_range(250, 300);
+ultimate_timer = random_range(500, 800);
 ultimate_spot_x = room_width / 2;
 ultimate_spot_y = (room_height / 2) - 30;
 ultimate = false;
@@ -49,5 +52,5 @@ timer = 0;
 
 duration = 10;
 
-type = "";
+type = "Spread";
 chance = irandom(100);

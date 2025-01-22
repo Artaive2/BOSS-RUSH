@@ -1,3 +1,6 @@
+//Inherit parent create event
+event_inherited();
+
 walk_spd = 1.2;
 run_spd = 2;
 spd = run_spd;
