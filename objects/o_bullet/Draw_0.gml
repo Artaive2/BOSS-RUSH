@@ -6,6 +6,7 @@ if(created == true){
 	
 	//Set created to false
 	created = false;
+	
 }
 
 
@@ -14,16 +15,17 @@ draw_self();
 //If the projectile is a bomb
 if(type = "Bomb"){
 	
-
-	
+	//If the flashing timer is greater than 0, reduce it by 1
 	if(flash_timer > 0){
 	
 		flash_timer--;
 	
 	}
 	
+	//If the flashing timer is less than or equals 0
 	if(flash_timer <= 0){
 		
+		//Apply flashing effect
 		shader_set(sh_flash);
 		draw_self();
 		shader_reset();

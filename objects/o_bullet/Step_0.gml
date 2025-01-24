@@ -116,7 +116,10 @@ switch(type){
 	
 	case "Explosive":
 	
+		//Set bullet to be the tracker bullet created in the create event
 		bullet = explosive_bullet;
+		
+		bullet.angle = angle;
 		
 		
 	
@@ -127,7 +130,7 @@ switch(type){
 }
 
 //Moving the bullet
-scr_bullet_move(bullet.spd, bullet.angle);
+scr_bullet_move(bullet.spd, bullet.angle, target);
 
 
 //Destroying bullet when it leaves the room

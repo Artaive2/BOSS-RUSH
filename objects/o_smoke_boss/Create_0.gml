@@ -52,5 +52,5 @@ timer = 0;
 
 duration = 10;
 
-type = "Spread";
+type = "";
 chance = irandom(100);

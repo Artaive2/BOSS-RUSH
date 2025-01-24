@@ -121,7 +121,7 @@ if(gear_y != y){
 #region Picking a projectile
 
 
-/*
+
 //If the chance is less than or equal to 10
 if(chance >= 80){
 
@@ -154,7 +154,7 @@ if(chance >= 0 && chance < 50){
 	chance = irandom(200 - the_health);
 
 }
-*/
+
 
 
 #endregion
@@ -217,25 +217,19 @@ if(ultimate_timer > 0){
 		
 		//Type to pass to the bullet
 		var _type = type;
-		var _angle = 0;
+		var _angle = point_direction(x, y, o_player.x, o_player.y);
 		
 		//Create a bullet
-		var _bullet_object = 0;
-		
-		//If the projectile is not of type spread
-		if(_type != "Spread"){
+		var _bullet_object = instance_create_layer(x, y + 7, "layer_instances", o_bullet);
 			
-				_angle = point_direction(x, y, o_player.x, o_player.y);
-				
-				_bullet_object = instance_create_layer(x, y + 7, "layer_instances", o_bullet);
-				
-		}
-		
 		//Go to the previously created bullet object
 		with(_bullet_object){
 		
 			//Set the type to the type picked by the smoke boss
 			type = _type;
+			
+			//Set shooter
+			target = o_player;
 			
 			//Set sprite index to gear
 			sprite_index = s_gear;
@@ -244,7 +238,9 @@ if(ultimate_timer > 0){
 		
 		}
 		
+		#region Old
 		
+		/*
 		if(_type == "Spread"){
 			
 			_angle = point_direction(x, y, o_player.x, o_player.y) - 40;
@@ -275,7 +271,8 @@ if(ultimate_timer > 0){
 		
 		}
 		
-		
+		*/
+		#endregion Old
 			
 		//Pick a random number for the attack timer
 		attack_timer = random_range(50, 100);
@@ -383,7 +380,12 @@ var _incr = 0;
 //If the boss is idle
 if(ultimate == true){
 		
+	//Type to pass to the bullet
 	var _type = choose("Spread", "Explosive");
+	var _angle = 0;
+		
+	//Create a bullet
+	var _bullet_object = 0;
 		
 	//If the duration is greater than 0
 	if(duration > 0){
@@ -391,6 +393,37 @@ if(ultimate == true){
 		//If the attack timer is equal to or less than 0
 		if(timer <= 0){
 		
+			//Get the direction of the player - 40
+			_angle = point_direction(x, y, o_player.x, o_player.y) - 40;
+			
+			//Create 3 projectiles at once
+			repeat(3){
+			
+				//Assign created projectile to local variable
+				_bullet_object = instance_create_layer(x, y + 7, "layer_instances", o_bullet);
+				
+				
+			
+				//Go to the previously created bullet object
+				with(_bullet_object){
+		
+					//Set the type to the type picked by the smoke boss
+					type = _type;
+			
+					//Set sprite index to gear
+					sprite_index = s_gear;
+			
+					angle = _angle;
+		
+				}
+				
+				//Increase angle by 40 for spread
+				_angle += 40;
+				
+			}
+				
+			#region Old
+			/*
 			//Spawn 3 projectiles at once
 			repeat(3){
 			
@@ -417,6 +450,9 @@ if(ultimate == true){
 		
 			}
 	
+			*/
+			#endregion Old
+			
 			//Reset timer
 			timer = 100;
 

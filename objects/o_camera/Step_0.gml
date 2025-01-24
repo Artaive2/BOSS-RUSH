@@ -20,6 +20,5 @@ if( instance_exists(o_player) ){
 
 //Set the position of the camera while flooring the x and y to view pixels properly
 camera_set_view_pos(view_camera[0], 
-
-floor(x - (camera_width * .5) ), 
-floor(y - (camera_height * .5) ) );
+floor(camera_x), 
+floor(camera_y) );

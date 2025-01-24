@@ -1,24 +1,34 @@
 //Inherit parent create event
 event_inherited();
 
+//Player variables
 walk_spd = 1.2;
 run_spd = 2;
 spd = run_spd;
 x_movement = 0;
 y_movement = 0;
 grv = .5;
+the_health = 30;
+
 
 //Jumping
 jump_height = -9;
 jumps = 1;
 coyote_time = true;
 
+
 //Grapple variables
 pulled = false;
 grapple_timer = 0;
 
 
-the_health = 30;
+//Gun variables
+ammo_max = 30;
+ammo = 30;
+reload_time = 120;
+reloading = false;
+type = "Straight";
+
 
 //Player state for finite machine
 my_state = player_states.moving;

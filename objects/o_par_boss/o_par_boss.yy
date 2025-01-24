@@ -1,15 +1,18 @@
 {
   "$GMObject":"",
-  "%Name":"o_wall",
+  "%Name":"o_par_boss",
   "eventList":[],
   "managed":true,
-  "name":"o_wall",
+  "name":"o_par_boss",
   "overriddenProperties":[],
   "parent":{
     "name":"Objects",
     "path":"folders/Objects.yy",
   },
-  "parentObjectId":null,
+  "parentObjectId":{
+    "name":"o_par_damage",
+    "path":"objects/o_par_damage/o_par_damage.yy",
+  },
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
@@ -27,10 +30,7 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":{
-    "name":"s_wall",
-    "path":"sprites/s_wall/s_wall.yy",
-  },
+  "spriteId":null,
   "spriteMaskId":null,
-  "visible":false,
+  "visible":true,
 }
