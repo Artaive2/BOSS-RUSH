@@ -1,8 +1,9 @@
 //If the bullet was just created
 if(created == true){
 	
+	
 	//Draw a flash
-	draw_sprite(s_flash, 0, x, y);
+	draw_sprite_ext(creation_effect, 0, x, y, effect_scale_x, effect_scale_y, 0, c_white, 1);
 	
 	//Set created to false
 	created = false;
@@ -11,6 +12,7 @@ if(created == true){
 
 
 draw_self();
+
 
 //If the projectile is a bomb
 if(type = "Bomb"){

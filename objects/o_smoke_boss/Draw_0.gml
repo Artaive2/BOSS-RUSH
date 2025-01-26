@@ -1,8 +1,6 @@
 //Inherit parent draw event;
 event_inherited();
 
-//draw_text(50, 50, string(instance_number(o_bullet)));
-
 //Draw gear
 draw_sprite(s_gear, gear_image_num, gear_x, gear_y + 5);
 

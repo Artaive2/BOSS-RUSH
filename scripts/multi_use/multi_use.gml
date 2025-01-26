@@ -20,7 +20,8 @@ function scr_col(_target){
 		if(_col_target){
 				
 			instance_destroy();
-					
+			
+			//Reduce the target's health
 			_col_target.the_health -= bullet.damage;
 			
 			//Set to damaged to apply flash

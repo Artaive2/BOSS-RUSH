@@ -7,5 +7,5 @@ function str_bullets(_damage, _spd, _angle) constructor{
 	spd = _spd;
 	angle = _angle;
 	
-
 }
+

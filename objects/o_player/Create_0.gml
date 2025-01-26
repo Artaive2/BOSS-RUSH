@@ -1,6 +1,8 @@
 //Inherit parent create event
 event_inherited();
 
+depth = -4000;
+
 //Player variables
 walk_spd = 1.2;
 run_spd = 2;

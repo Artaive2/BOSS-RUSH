@@ -57,6 +57,7 @@
     {"id":{"name":"s_background_clouds","path":"sprites/s_background_clouds/s_background_clouds.yy",},},
     {"id":{"name":"s_background_gears","path":"sprites/s_background_gears/s_background_gears.yy",},},
     {"id":{"name":"s_bullet","path":"sprites/s_bullet/s_bullet.yy",},},
+    {"id":{"name":"s_explosion","path":"sprites/s_explosion/s_explosion.yy",},},
     {"id":{"name":"s_fire","path":"sprites/s_fire/s_fire.yy",},},
     {"id":{"name":"s_flash","path":"sprites/s_flash/s_flash.yy",},},
     {"id":{"name":"s_foreground_gears","path":"sprites/s_foreground_gears/s_foreground_gears.yy",},},

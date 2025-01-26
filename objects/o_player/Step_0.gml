@@ -73,12 +73,14 @@ switch(my_state){
 		
 		}
 		
+		//If the speed is walking speed, change sprite to walking
 		if(spd == walk_spd){
 		
 			sprite_index = player_sprite[player_move_states.walking];
 		
 		}
 		
+		//If the speed is running speed, change sprite to running
 		if(spd == run_spd){
 		
 			sprite_index = player_sprite[player_move_states.running];
@@ -129,7 +131,7 @@ switch(my_state){
 				ammo -= 1
 	
 				//Create a bullet and edit its code
-				with(instance_create_layer(x + (sign(x_movement) * 2), y - 10, "layer_instances", o_bullet) ){
+				with(instance_create_layer(x + (image_xscale * 10), y - 15, "layer_instances", o_bullet) ){
 				
 					//Pass the type
 					type = _type;
@@ -148,6 +150,9 @@ switch(my_state){
 					
 					//Set sprite of the bullet
 					sprite_index = s_bullet;
+					
+					effect_scale_x = .5;
+					effect_scale_y = .5;
 				
 				}
 				

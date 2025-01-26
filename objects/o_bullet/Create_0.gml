@@ -1,3 +1,5 @@
+depth = -5000;
+
 //Bullet variables
 type = "";
 angle = 0; //point_direction(x, y, o_player.x, o_player.y);
@@ -7,13 +9,17 @@ bullet = 0;
 created = true;
 target = noone;
 
+//Effect variables
+creation_effect = s_flash;
+effect_scale_x = 1;
+effect_scale_y = 1;
 
 //Tracker variables
 tracker_timer = 250;
 
 //Bomber variables
 bomb_timer = 250;
-explosion_area = 30;
+small_explosion_area = 32;
 flash_timer = 2 * (bomb_timer / 4);
 
 //Creating bullet structs	

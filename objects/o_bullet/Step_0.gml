@@ -69,7 +69,7 @@ switch(type){
 		if(bomb_timer <= 0){
 		
 			//Checking for collision with the player in the area of the explosion
-			var _col = collision_circle(x, y, explosion_area, o_player, 1, 1);
+			var _col = collision_circle(x, y, small_explosion_area, o_player, 1, 1);
 			
 			//If there's a collision with the player
 			if(_col){
@@ -83,7 +83,7 @@ switch(type){
 			var _exp = instance_create_layer(x, y, "layer_effects", o_animations);
 			
 			//Pass a sprite
-			_exp.sprite_index = s_fire;
+			_exp.sprite_index = s_explosion;
 			
 			//Destroy this instance
 			instance_destroy();
