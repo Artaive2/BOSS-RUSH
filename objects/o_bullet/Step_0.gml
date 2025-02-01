@@ -54,6 +54,9 @@ switch(type){
 		//Set bullet to be the tracker bullet created in the create event
 		bullet = bomb_bullet;
 		
+		//Set damage area
+		explosion_area = 32;
+		
 		//Get the current direction of the player
 		bullet.angle = point_direction(x, y, o_player.x, o_player.y);
 			
@@ -69,7 +72,7 @@ switch(type){
 		if(bomb_timer <= 0){
 		
 			//Checking for collision with the player in the area of the explosion
-			var _col = collision_circle(x, y, small_explosion_area, o_player, 1, 1);
+			var _col = collision_circle(x, y, explosion_area, o_player, 1, 1);
 			
 			//If there's a collision with the player
 			if(_col){
@@ -121,6 +124,8 @@ switch(type){
 		
 		bullet.angle = angle;
 		
+		//Set damage area
+		explosion_area = 42;
 		
 	
 	break;

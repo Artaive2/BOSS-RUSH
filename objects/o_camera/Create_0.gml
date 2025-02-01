@@ -6,6 +6,10 @@ camera_height = 360;
 camera_x = 0;
 camera_y = 0;
 
+//Camera effects
+camera_shake = 0;
+shake_amount = 4;
+
 
 //Enabling camera
 view_enabled = true;
@@ -15,7 +19,6 @@ view_visible[0] = true;
 scale = 2;
 viewport_width = camera_width * scale;
 viewport_height = camera_height * scale;
-
 
 //Setting window size
 window_set_size(viewport_width, viewport_height);

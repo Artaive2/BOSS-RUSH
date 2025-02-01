@@ -3,14 +3,18 @@ event_inherited();
 
 depth = -4000;
 
+
 //Player variables
+the_health = 30;
+x_movement = 0;
+y_movement = 0;
+prev_state = 0;
+
+//Movement variables
 walk_spd = 1.2;
 run_spd = 2;
 spd = run_spd;
-x_movement = 0;
-y_movement = 0;
-grv = .5;
-the_health = 30;
+grv = .4;
 
 
 //Jumping
@@ -19,15 +23,46 @@ jumps = 1;
 coyote_time = true;
 
 
-//Grapple variables
-pulled = false;
-grapple_timer = 0;
+#region Saw variables
+
+mouse_direction = 0;
+
+//Arrow
+arrow_opacity = 0;
+arrow_frame = 0;
+arrow_max_frame = 5;
+arrow_animation_speed = 8;
+
+
+//Saw
+saw_duration = 300;
+saw_speed = 5;
+saw_damage = 3;
+saw_bounce = 1;
+saw_charge_time = 60;
+
+
+//Energy
+saw_energy_cost = 5;
+energy = 30;
+energy_max = 30;
+energy_regain = 0.01;
+
+
+#endregion Saw variables
+
+
+//Knockback
+knockback_time = 24;
+knockback_amount = 3;
+knockback = false;
 
 
 //Gun variables
 ammo_max = 30;
 ammo = 30;
 reload_time = 120;
+shoot_time = 0;
 reloading = false;
 type = "Straight";
 
@@ -36,6 +71,7 @@ type = "Straight";
 my_state = player_states.moving;
 
 
+//Setting sprites to array for easy reference
 player_sprite[player_move_states.idle] = s_player_idle;
 player_sprite[player_move_states.running] = s_player_running;
 player_sprite[player_move_states.walking] = s_player_walking;

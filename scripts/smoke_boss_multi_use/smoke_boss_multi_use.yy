@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"smoke_boss_multi_use",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"smoke_boss_multi_use",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

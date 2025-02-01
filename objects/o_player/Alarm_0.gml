@@ -1,3 +1,5 @@
+///@description Ammo
+
 //Set ammo number to be the maximum
 ammo = ammo_max
 

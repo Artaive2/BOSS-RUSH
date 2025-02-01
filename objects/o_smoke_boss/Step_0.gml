@@ -1,7 +1,11 @@
-#region First phase
+var _change_phase = keyboard_check(ord("C"));
 
-if(phase == 1){
+switch(phase){
 
+	#region First phase
+	
+	case smoke_phases.first:
+	
 
 	#region Manually animating hands and gear
 
@@ -26,26 +30,15 @@ if(phase == 1){
 			gear_image_num = 0;
 
 		}
-		#endregion
+		#endregion Gear
 	
 	
 		#region Hands
 	
 		//Normal hands animation
 		if(ultimate == false){
-
-			//If the image number is less than the max image number
-			if(hands_image_num < hands_image_max_num){
-
-				//Increase by 1
-				hands_image_num++;
-
-			}else{//If the image number is equal or higher than the max number
-
-				//Reset it to 0
-				hands_image_num = 0;
-
-			}
+			
+			scr_animate_hands();
 		
 		}
 	
@@ -82,27 +75,7 @@ if(phase == 1){
 	#endregion
 
 
-	#region Making the hands and gear follow the smoke boss
-
-	//Hands
-
-	//If the x of the hands does not equal the x of the object
-	if(hands_x != x){
-	
-		//Slowly move the x position of the hands to the x of the object
-		hands_x = lerp(hands_x, x, .2);
-	}
-
-	//If the y of the hands does not equal the y of the object
-	if(hands_y != y){
-	
-		//Slowly move the y position of the hands to the y of the object
-		hands_y = lerp(hands_y, y, .2);
-
-	}
-
-
-	//Gear
+	#region Making the gear follow the smoke boss
 
 	//If the x of the gear does not equal the x of the object
 	if(gear_x != x){
@@ -120,13 +93,13 @@ if(phase == 1){
 
 	}
 
-	#endregion
+	#endregion Making the gear follow the smoke boss
 
 
 	#region Picking a projectile
 
 
-	/*
+	
 	//If the chance is less than or equal to 10
 	if(chance >= 80){
 
@@ -160,7 +133,7 @@ if(phase == 1){
 
 	}
 
-	*/
+
 
 	#endregion Picking a projectile
 
@@ -488,10 +461,61 @@ if(phase == 1){
 	#endregion Ultimate attack
 	
 	#endregion Attacking
+	
+	break;
+	
+	#endregion First phase
+
+
+	#region Second phase
+	
+	case smoke_phases.second:
+	
+		
+		//If the image speed is higher than 0
+	if(other_image_speed > 0){
+	
+		//Reduce by 1
+		other_image_speed--;
+
+	}else{//If it's 0 or less, trigger animation
+	
+		//Normal hands animation
+		scr_animate_hands();
+		
+		//Reset the image speed to 4
+		other_image_speed = 4;
+
+	}
+	
+		
+	
+	break;
+	
+	#endregion Second phase
+}
+
+
+#region Making the hands follow the smoke boss
+
+//Hands
+
+//If the x of the hands does not equal the x of the object
+if(hands_x != x){
+	
+	//Slowly move the x position of the hands to the x of the object
+	hands_x = lerp(hands_x, x, .2);
+}
+
+//If the y of the hands does not equal the y of the object
+if(hands_y != y){
+	
+	//Slowly move the y position of the hands to the y of the object
+	hands_y = lerp(hands_y, y, .2);
 
 }
 
-#endregion First phase
+#endregion Making the hands follow the smoke boss
 
 
 #region Moving
@@ -528,5 +552,17 @@ y += y_speed;
 		y = yprevious;
 	
 	}
+
+#endregion
+
+
+#region TEST
+
+///TO DELETE
+if(_change_phase){
+
+	phase = smoke_phases.second;
+
+}
 
 #endregion

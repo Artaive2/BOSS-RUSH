@@ -15,11 +15,11 @@ effect_scale_x = 1;
 effect_scale_y = 1;
 
 //Tracker variables
-tracker_timer = 250;
+tracker_timer = 200;
 
 //Bomber variables
 bomb_timer = 250;
-small_explosion_area = 32;
+explosion_area = 0;
 flash_timer = 2 * (bomb_timer / 4);
 
 //Creating bullet structs	

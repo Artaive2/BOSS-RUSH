@@ -1,8 +1,8 @@
 enum player_states{
 
 	moving,
-	pulled,
-	grapple
+	saw,
+	knockback,
 
 }
 
@@ -22,5 +22,13 @@ enum bullet_type{
 	tracker,
 	bomb,
 	spread,
+
+}
+
+enum smoke_phases{
+
+	first,
+	second,
+	death,
 
 }

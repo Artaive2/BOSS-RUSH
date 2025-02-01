@@ -31,8 +31,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"smoke boss",
-    "path":"folders/Sprites/smoke boss.yy",
+    "name":"First phase",
+    "path":"folders/Sprites/Smoke boss/First phase.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -9,7 +9,7 @@ the_health = 100;
 spd = 2;
 max_spd = 1;
 easing = .01;
-phase = 1;
+phase = smoke_phases.first;
 still = false;
 
 //The range used to detect if player is getting closer
@@ -52,5 +52,5 @@ timer = 0;
 
 duration = 10;
 
-type = "Bomb";
+type = "";
 chance = irandom(100);
