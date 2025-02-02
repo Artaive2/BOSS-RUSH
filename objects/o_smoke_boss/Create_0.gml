@@ -5,6 +5,8 @@ event_inherited();
 x_speed = 0;
 y_speed = 0;
 
+laugh = false;
+y_clamp = (room_height / 2);
 the_health = 100;
 spd = 2;
 max_spd = 1;
@@ -47,6 +49,7 @@ attack_timer = random_range(50, 100);
 ultimate_timer = random_range(500, 800);
 ultimate_spot_x = room_width / 2;
 ultimate_spot_y = (room_height / 2) - 30;
+
 ultimate = false;
 timer = 0;
 

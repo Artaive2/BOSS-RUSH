@@ -12,8 +12,8 @@
   "duration":1.276604,
   "name":"Explosion_3",
   "parent":{
-    "name":"Sounds",
-    "path":"folders/Sounds.yy",
+    "name":"VFX",
+    "path":"folders/Sounds/VFX.yy",
   },
   "preload":false,
   "resourceType":"GMSound",
@@ -21,5 +21,5 @@
   "sampleRate":44100,
   "soundFile":"Explosion_3.wav",
   "type":0,
-  "volume":0.0,
+  "volume":1.0,
 }

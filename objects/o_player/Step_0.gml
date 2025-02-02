@@ -20,7 +20,7 @@ var _saw_release = mouse_check_button_released(mb_right);
 #endregion Controls
 
 //Checking if player is gonna collide with the ground
-var _floor_col = place_meeting(x, y + y_movement, o_wall);
+var _floor_col = place_meeting(x, y + y_movement, o_floor);
 
 
 
@@ -75,7 +75,7 @@ switch(my_state){
 		}
 		
 		//Apply pixel perfect collision
-		move(o_wall);
+		move(o_par_walls_and_floor);
 		
 		
 		#region Collision with boss and knockback
@@ -168,6 +168,9 @@ switch(my_state){
 				
 					//Set angle to be the mouse cursor
 					angle = point_direction(x, y, mouse_x, mouse_y);
+					
+					//Create a new straight bullet and set its stats
+					straight_bullet = new str_bullets(1, spd, angle);
 		
 					//Change image angle to face mouse
 					image_angle = angle;
@@ -175,6 +178,7 @@ switch(my_state){
 					//Set sprite of the bullet
 					sprite_index = s_bullet;
 					
+					//Reduce the size of the while circle by half since the player bullet is small
 					effect_scale_x = .5;
 					effect_scale_y = .5;
 				
@@ -340,11 +344,15 @@ switch(my_state){
 		
 		#endregion Rotating Saw
 		
-		//If the saw is going to collide with the floor
-		if( place_meeting(x, y + sign(y_movement), o_wall ) ){
+		#region Collision
+		
+		#region Y axis
+		
+		//If the saw is going to collide with the ground
+		if( place_meeting(x, y + sign(y_movement), o_floor ) ){
 		
 			//While it isn't colliding after it moves one pixel closer
-			while( !place_meeting(x, y + sign(y_movement), o_wall ) ){
+			while( !place_meeting(x, y + sign(y_movement), o_floor ) ){
 			
 				//Move one pixel closer
 				y += sign(y_movement);
@@ -357,10 +365,10 @@ switch(my_state){
 				//Stop y movement
 				y_movement = 0;
 				
-				//Decrease saw speed
-				saw_speed -= 1;
+				//Decrease saw speed by 1
+				saw_speed--;
 				
-				//Bounce back in 
+				//Bounce back in random speed between 1 and the current saw speed which is decreasing to make the bounce shorter each time
 				y_movement -= random_range(1, saw_speed) * saw_bounce;
 			
 			}else{//If the saw speed reaches 0 or less
@@ -373,12 +381,37 @@ switch(my_state){
 		
 		}
 		
+		#endregion  Y axis
+		
+		
+		#region X axis
+		
+		//If the player is colliding with the wall
+		if( place_meeting(x + x_movement, y, o_wall ) ){
+		
+			//Move in the opposite direction and add a push (* 3)
+			x_movement = 3 * sign(-x_movement);
+			
+			
+			mouse_direction -= 180;
+		
+		}
+		
+		#endregion X axis
+		
+		
+		
+		#endregion Collision
+		
+		//Move the saw in 
+		x_movement = lengthdir_x(saw_speed, mouse_direction);
+		
+		
+		
 		//Apply movement
 		x += x_movement;
 		y += y_movement;
 		
-		//Move the saw in 
-		x_movement = lengthdir_x(saw_speed, mouse_direction);
 		
 		
 		//If player is not on the ground	
@@ -389,11 +422,12 @@ switch(my_state){
 
 		}
 		
+		
 		//Apply collidion with the boss and knockback followed by the passed (parameter 1) damage to the passed object (parameter 2)
 		scr_knockback(o_par_boss, saw_damage);
 		
 		//If the saw button has been pressed or the duration of the saw has run out, turn player back to normal
-		if(_saw || saw_duration <= 0){
+		if(_saw || saw_duration <= 0){ // || saw_speed <= 0
 			
 			//Set mask to player sprite
 			mask_index = s_player_idle;
@@ -436,7 +470,7 @@ switch(my_state){
 		}
 	
 		//Apply movement
-		move(o_wall);
+		move(o_par_walls_and_floor);
 		
 		//If the player touches the ground
 		if(_floor_col){
@@ -465,6 +499,12 @@ switch(my_state){
 
 }
 
+//Death
+if(the_health <= 0){
+	
+	instance_destroy();
+
+}
 
 #region Energy recharge
 

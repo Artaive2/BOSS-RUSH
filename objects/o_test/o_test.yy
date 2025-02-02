@@ -6,8 +6,8 @@
   "name":"o_test",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Objects.yy",
+    "name":"Test",
+    "path":"folders/Objects/Test.yy",
   },
   "parentObjectId":{
     "name":"o_par_boss",

@@ -23,15 +23,19 @@ switch(type){
 		//Set bullet to be the tracker bullet created in the create event
 		bullet = tracker_bullet;
 		
-		//If the tracker time is greater than 0
-		if(tracker_timer > 0){
+		if(instance_exists(o_player) ){
 			
-			//Get the current direction of the player
-			bullet.angle = point_direction(x, y, o_player.x, o_player.y);
+			//If the tracker time is greater than 0
+			if(tracker_timer > 0){
 			
-			//Reduce tracker timer
-			tracker_timer--;
+				//Get the current direction of the player
+				bullet.angle = point_direction(x, y, o_player.x, o_player.y);
+			
+				//Reduce tracker timer
+				tracker_timer--;
 		
+			}
+			
 		}
 		
 		//If the tracker timer is less than or equal 0
@@ -49,7 +53,6 @@ switch(type){
 	#region Bomb
 	
 	case "Bomb":
-	
 		
 		//Set bullet to be the tracker bullet created in the create event
 		bullet = bomb_bullet;
@@ -57,8 +60,12 @@ switch(type){
 		//Set damage area
 		explosion_area = 32;
 		
-		//Get the current direction of the player
-		bullet.angle = point_direction(x, y, o_player.x, o_player.y);
+		if(instance_exists(o_player) ){
+			
+			//Get the current direction of the player
+			bullet.angle = point_direction(x, y, o_player.x, o_player.y);
+			
+		}
 			
 		//If the tracker time is greater than 0
 		if(bomb_timer > 0){

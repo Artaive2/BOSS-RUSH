@@ -12,8 +12,8 @@
   "duration":4.3085,
   "name":"Steam_Ghost_Laughing",
   "parent":{
-    "name":"Sounds",
-    "path":"folders/Sounds.yy",
+    "name":"VFX",
+    "path":"folders/Sounds/VFX.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

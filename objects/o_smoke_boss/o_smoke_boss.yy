@@ -12,8 +12,8 @@
   "name":"o_smoke_boss",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Objects.yy",
+    "name":"Bosses",
+    "path":"folders/Objects/Bosses.yy",
   },
   "parentObjectId":{
     "name":"o_par_boss",

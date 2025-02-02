@@ -6,10 +6,13 @@
   "name":"o_wall",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Objects.yy",
+    "name":"Environment",
+    "path":"folders/Objects/Environment.yy",
   },
-  "parentObjectId":null,
+  "parentObjectId":{
+    "name":"o_par_walls_and_floor",
+    "path":"objects/o_par_walls_and_floor/o_par_walls_and_floor.yy",
+  },
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,

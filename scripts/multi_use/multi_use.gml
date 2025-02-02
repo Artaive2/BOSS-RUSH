@@ -1,13 +1,16 @@
+
+
+
 //Knockback code
 
 /// @param _damaged_object
 /// @param _damage_amount
 function scr_knockback(_damaged_object, _damage_amount){
 
-			//Checking for collision with the boss
-			var _boss_col = place_meeting(x + x_movement, y + y_movement, o_par_boss);
+		//Checking for collision with the boss
+		var _boss_col = place_meeting(x + x_movement, y + y_movement, o_par_boss);
 			
-			if(_boss_col){
+		if(_boss_col){
 		
 			//Reduce object health by the passed amount
 			_damaged_object.the_health -= _damage_amount;
@@ -53,8 +56,8 @@ function scr_knockback(_damaged_object, _damage_amount){
 //Function for destroying the instance in case of colliding with a wall or the player, and damaging the player
 function scr_col(_target){
 	
-		//If the bullet collides with a wall, destroy it
-		if(collision_point(x, y, o_wall, false, true)){
+		//If the bullet collides with the ground, destroy it
+		if(collision_point(x, y, o_floor, false, true)){
 				
 			instance_destroy();
 			
@@ -112,8 +115,8 @@ function scr_col_explosion(_target, _range){
 	}
 	
 	
-	//If the bullet collides with a wall, destroy it
-	if(collision_point(x, y, o_wall, false, true)){
+	//If the bullet collides with the ground, destroy it
+	if(collision_point(x, y, o_floor, false, true)){
 				
 		instance_destroy();
 			

@@ -1,4 +1,15 @@
 
+if(room == RM_main_menu){
+
+	camera_width = room_width;
+	camera_height = room_height;
+
+}else{
+
+	camera_width = 600;
+	camera_height = 360;
+
+}
 //Camera properties
 target = 0;
 camera_width = 600;
@@ -12,8 +23,8 @@ shake_amount = 4;
 
 
 //Enabling camera
-view_enabled = true;
-view_visible[0] = true;
+//view_enabled = true;
+//view_visible[0] = true;
 
 //View properties
 scale = 2;
