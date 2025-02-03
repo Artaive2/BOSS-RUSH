@@ -94,6 +94,7 @@
     {"id":{"name":"s_background_clouds","path":"sprites/s_background_clouds/s_background_clouds.yy",},},
     {"id":{"name":"s_background_gears","path":"sprites/s_background_gears/s_background_gears.yy",},},
     {"id":{"name":"s_big_explosion","path":"sprites/s_big_explosion/s_big_explosion.yy",},},
+    {"id":{"name":"s_boss_healthbar","path":"sprites/s_boss_healthbar/s_boss_healthbar.yy",},},
     {"id":{"name":"s_bullet","path":"sprites/s_bullet/s_bullet.yy",},},
     {"id":{"name":"s_Clock_tower","path":"sprites/s_Clock_tower/s_Clock_tower.yy",},},
     {"id":{"name":"s_explosion","path":"sprites/s_explosion/s_explosion.yy",},},
