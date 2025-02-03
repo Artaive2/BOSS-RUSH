@@ -1,4 +1,5 @@
 var _test = keyboard_check(ord("T"));
+var _test2 = keyboard_check(ord("Y"));
 
 //Controls
 var _quit = keyboard_check( vk_escape );
@@ -33,6 +34,12 @@ if(room != RM_main_menu && room != Roomtutorial){
 			timer--;
 			
 		}
+		
+		if(timer <= 0){
+		
+			game_restart();
+		
+		}
 
 	}
 	
@@ -40,6 +47,12 @@ if(room != RM_main_menu && room != Roomtutorial){
 
 
 if(_test){
+
+	room_goto(RM_second_boss);
+
+}
+
+if(_test2){
 
 	instance_destroy(o_player);
 

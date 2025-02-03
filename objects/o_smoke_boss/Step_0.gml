@@ -352,6 +352,9 @@ if(instance_exists(o_player)){
 		
 							//Set the type to the type picked by the smoke boss
 							type = _type;
+							
+							//Set target to damage
+							target = o_player;
 			
 							//Set sprite index to gear
 							sprite_index = s_gear;

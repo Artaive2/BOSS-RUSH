@@ -8,4 +8,5 @@ intro_played = false;
 //Boss health to draw to the screen
 boss_health = 0;
 
-timer = 60;
+//Timer used to restart game
+timer = 180;
