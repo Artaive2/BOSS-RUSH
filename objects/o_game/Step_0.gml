@@ -16,6 +16,7 @@ layer_x("layer_foreground", _camera_x * .25);
 //If the escape button has been pressed, quit game
 if(_quit){
 
+	//If it is not the tutorial room, end the game
 	if(room != Roomtutorial){
 		
 		game_end();
@@ -24,17 +25,20 @@ if(_quit){
 
 }
 
-
+//If the room is not the main menu or the tutorial room
 if(room != RM_main_menu && room != Roomtutorial){
 	
+	//If the character does not exist anymore
 	if(!instance_exists(o_player) ){
 
+		//Reduce timer
 		if(timer > 0){
 		
 			timer--;
 			
 		}
 		
+		//If the timer finally reaches 0, restart game
 		if(timer <= 0){
 		
 			game_restart();
@@ -77,10 +81,13 @@ if(room == RM_first_boss){
 	
 	}
 
+	//
 	if( !instance_exists(o_smoke_boss) ){
 	
 		//Pass the health to the variable
 		boss_health = 0;
+		
+		room_goto_next();
 
 	
 	}
@@ -104,6 +111,8 @@ if(room == RM_second_boss){
 	
 		//Pass the health to the variable
 		boss_health = 0;
+		
+		game_restart();
 	
 	}
 
@@ -118,9 +127,18 @@ if(room == RM_second_boss){
 //Player the theme music if the room is the arena (battle room)
 if(room != RM_main_menu && room != Roomtutorial){
 	
+	//If the audio is not already playing, play it	
+	if( !audio_is_playing(Fight_theme) ){
+		
+		audio_play_sound(Fight_theme, 3, 1);
+			
+	}
+			
 	
-	var _play_music = false;
 	
+	#region Old
+	
+	/*
 	if(intro_played == false && !audio_is_playing(Fight_intro_theme) ){
 		
 		//Play the intro
@@ -142,6 +160,9 @@ if(room != RM_main_menu && room != Roomtutorial){
 			
 	}
 	
+	*/
+	
+	#endregion Old
 
 }
 

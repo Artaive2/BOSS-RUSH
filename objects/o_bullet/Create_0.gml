@@ -3,7 +3,7 @@ depth = -5000;
 //Bullet variables
 type = "";
 angle = 0; //point_direction(x, y, o_player.x, o_player.y);
-damage = 1;
+damage = 0;
 spd = 0;
 bullet = 0;
 created = true;

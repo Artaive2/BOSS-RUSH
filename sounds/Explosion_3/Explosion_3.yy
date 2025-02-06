@@ -21,5 +21,5 @@
   "sampleRate":44100,
   "soundFile":"Explosion_3.wav",
   "type":0,
-  "volume":1.0,
+  "volume":0.2,
 }

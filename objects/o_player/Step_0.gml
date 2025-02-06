@@ -165,12 +165,15 @@ switch(my_state){
 					
 					//Set speed
 					spd = 20;
+					
+					//Set damage
+					damage = 50;
 				
 					//Set angle to be the mouse cursor
 					angle = point_direction(x, y, mouse_x, mouse_y);
 					
 					//Create a new straight bullet and set its stats
-					straight_bullet = new str_bullets(1, spd, angle);
+					straight_bullet = new str_bullets(damage, spd, angle);
 		
 					//Change image angle to face mouse
 					image_angle = angle;
@@ -502,7 +505,7 @@ switch(my_state){
 //Death
 if(the_health <= 0){
 	
-	instance_destroy();
+	//instance_destroy();
 
 }
 

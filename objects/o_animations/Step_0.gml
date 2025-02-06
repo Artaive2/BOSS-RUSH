@@ -9,7 +9,7 @@ if(image_index == ( image_number - 1) ){
 if(sprite_index == s_explosion && !sound_played){
 
 	//Play exposion sound
-	audio_play_sound(choose(Explosion_1, Explosion_2, Explosion_3), 5, 0);
+	audio_play_sound( choose(Explosion_1, Explosion_2, Explosion_3), 5, 0);
 	
 	//Sound played
 	sound_played = true;

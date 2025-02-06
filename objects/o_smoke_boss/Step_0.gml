@@ -436,6 +436,15 @@ if(instance_exists(o_player)){
 
 }
 
+
+//Death
+if(the_health <= 0){
+
+	instance_destroy();
+
+}
+
+
 #region Making the hands follow the smoke boss
 
 //Hands

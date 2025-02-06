@@ -12,8 +12,8 @@
   "duration":4.3085,
   "name":"Steam_Ghost_Laughing",
   "parent":{
-    "name":"VFX",
-    "path":"folders/Sounds/VFX.yy",
+    "name":"Ghost Boss",
+    "path":"folders/Sounds/VFX/Ghost Boss.yy",
   },
   "preload":false,
   "resourceType":"GMSound",
