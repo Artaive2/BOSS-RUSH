@@ -55,5 +55,5 @@ timer = 0;
 
 duration = 10;
 
-type = "";
+type = "Bomb";
 chance = irandom(100);

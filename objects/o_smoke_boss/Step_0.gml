@@ -102,7 +102,7 @@ if(instance_exists(o_player)){
 		#region Picking a projectile
 
 
-	
+		/*
 		//If the chance is less than or equal to 10
 		if(chance >= 80){
 
@@ -135,7 +135,7 @@ if(instance_exists(o_player)){
 			chance = irandom(200 - the_health);
 
 		}
-
+		*/
 
 
 		#endregion Picking a projectile
@@ -174,7 +174,8 @@ if(instance_exists(o_player)){
 				y_speed = clamp(y_speed, -max_spd, max_spd);
 
 			}
-	
+			
+			//If the boss is not too close to the player nor too far, stay idle
 			if(!_col && distance_to_object(o_player) < good_range){
 	
 				x_speed = 0;
@@ -324,7 +325,8 @@ if(instance_exists(o_player)){
 		if(ultimate == true){
 		
 			//Type to pass to the bullet
-			var _type = choose("Spread", "Explosive");
+			//var _type = choose("Spread", "Explosive");
+			var _type = "Explosive";
 			var _angle = 0;
 		
 			//Create a bullet

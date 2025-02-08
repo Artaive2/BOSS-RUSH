@@ -9,7 +9,6 @@ the_health = 30;
 x_movement = 0;
 y_movement = 0;
 prev_state = 0;
-damage = 50;
 
 //Movement variables
 walk_spd = 1.2;

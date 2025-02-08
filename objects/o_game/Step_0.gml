@@ -1,5 +1,5 @@
 var _test = keyboard_check(ord("T"));
-var _test2 = keyboard_check(ord("Y"));
+
 
 //Controls
 var _quit = keyboard_check( vk_escape );
@@ -56,18 +56,13 @@ if(_test){
 
 }
 
-if(_test2){
-
-	instance_destroy(o_player);
-
-}
 
 window_set_cursor(cr_none);
 
 cursor_sprite = Scursor;
 
 
-
+#region Assigning health of the current boss to the boss health variable
 
 //If it's the first boss's room
 if(room == RM_first_boss){
@@ -87,13 +82,15 @@ if(room == RM_first_boss){
 		//Pass the health to the variable
 		boss_health = 0;
 		
-		room_goto_next();
+		room_goto(RM_second_boss);
 
 	
 	}
 
 
 }
+
+
 
 //If it's the second boss's room
 if(room == RM_second_boss){
@@ -118,6 +115,31 @@ if(room == RM_second_boss){
 
 
 }
+
+
+#endregion Assigning health of the current boss to the boss health variable
+
+
+#region Calculating boss health to animate health bar (10 frames)
+
+
+//If it's a room with a boss
+if(room != RM_main_menu && room != Roomtutorial){
+
+	//If the variable has not been set
+	if(boss_full_health == -1){
+		
+		//Get full boss health
+		boss_full_health = boss_health;
+	
+	}
+	
+	
+
+}
+	
+	
+#endregion Calculating boss health to animate health bar (10 frames)
 
 
 

@@ -23,6 +23,7 @@ switch(type){
 		//Set bullet to be the tracker bullet created in the create event
 		bullet = tracker_bullet;
 		
+		//If the player still exists
 		if(instance_exists(o_player) ){
 			
 			//If the tracker time is greater than 0
@@ -94,6 +95,8 @@ switch(type){
 			
 			//Pass a sprite
 			_exp.sprite_index = s_explosion;
+			
+			_exp.sound_id = choose(Explosion_1, Explosion_2, Explosion_3);
 			
 			//Destroy this instance
 			instance_destroy();

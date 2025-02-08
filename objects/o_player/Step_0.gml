@@ -167,7 +167,7 @@ switch(my_state){
 					spd = 20;
 					
 					//Set damage
-					damage = 50;
+					damage = 1;
 				
 					//Set angle to be the mouse cursor
 					angle = point_direction(x, y, mouse_x, mouse_y);
@@ -532,7 +532,7 @@ ammo = clamp(ammo, 0, ammo_max);
 #region Confining instance to room
 
 	//Horizontal checking
-	if(bbox_left < 0 || bbox_right > room_width){
+	if(bbox_left < 55 || bbox_right > (room_width - 55)){
 	
 		x = xprevious;
 	

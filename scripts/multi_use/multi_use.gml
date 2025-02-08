@@ -10,6 +10,7 @@ function scr_knockback(_damaged_object, _damage_amount){
 		//Checking for collision with the boss
 		var _boss_col = place_meeting(x + x_movement, y + y_movement, o_par_boss);
 			
+		//If there's a collision with the boss
 		if(_boss_col){
 		
 			//Reduce object health by the passed amount
@@ -100,6 +101,9 @@ function scr_col_explosion(_target, _range){
 	//The sprite to draw when the instance is destroyed
 	var _sprite = -1;
 	
+	//Choose a sound for the explosion
+	var _sound = choose(Explosion_1, Explosion_2, Explosion_3);
+	
 	//Bomb
 	if(type == "Bomb"){
 	
@@ -122,8 +126,16 @@ function scr_col_explosion(_target, _range){
 			
 		//Create an effect
 		var _effect = instance_create_layer(x, y, "layer_effects", o_animations);
-			
-		_effect.sprite_index = _sprite;
+		
+		with(_effect){
+		
+			//Pass sprite
+			sprite_index = _sprite;
+		
+			//Pass sound id
+			sound_id = _sound;
+		
+		}
 		
 		//Check for collision with the target (explosion collision)
 		var _col_range = collision_circle(x, y, _range, _target, true, true);
@@ -149,11 +161,21 @@ function scr_col_explosion(_target, _range){
 			
 		//Set to damaged to apply flash
 		_col_target.damaged = true;
-			
+		
 		//Create an effect
 		var _effect = instance_create_layer(x, y, "layer_effects", o_animations);
 			
-		_effect.sprite_index = _sprite;
+		
+		with(_effect){
+		
+			//Pass sprite
+			sprite_index = _sprite;
+		
+			//Pass sound id
+			sound_id = _sound;
+		
+		}
+			
 				
 	}
 
